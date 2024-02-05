@@ -1,15 +1,15 @@
 
 
-const http = require('http');
+
 const fs = require('fs');
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
 
 const app = express();
-const port = 5500;
 
-// Set up Multer storage
+
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'uploads/'); // Specify the folder where files will be stored
@@ -19,10 +19,10 @@ const storage = multer.diskStorage({
   },
 });
 
-// Create Multer instance
+
 const upload = multer({ storage: storage });
 
-// Set up routes
+
 app.get('/', (req, res) => {
   res.end('This is Home Page');
 });
@@ -48,7 +48,7 @@ app.get('/file-write', (req, res) => {
   });
 });
 
-// Handle file upload
+
 app.post('/upload', upload.single('file'), (req, res) => {
   if (!req.file) {
     return res.status(400).send('No file uploaded.');
@@ -57,12 +57,10 @@ app.post('/upload', upload.single('file'), (req, res) => {
   res.send('File uploaded successfully: ' + req.file.filename);
 });
 
-// Create HTTP server
-const server = http.createServer(app);
 
-// Listen on port 5500
-server.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+
+app.listen(5500, () => {
+  console.log(`Server is running at http://localhost:5500`);
 });
 
 

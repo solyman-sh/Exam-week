@@ -1,18 +1,18 @@
 
 
-
+const http = require('http');
 const fs = require('fs');
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
 
 const app = express();
-
+const port = 5500;
 
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/'); // Specify the folder where files will be stored
+    cb(null, 'uploads/'); 
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);
@@ -58,10 +58,23 @@ app.post('/upload', upload.single('file'), (req, res) => {
 });
 
 
+const server = http.createServer(app);
 
-app.listen(5500, () => {
-  console.log(`Server is running at http://localhost:5500`);
+
+server.listen(port, () => {
+  console.log(`Server is running at http://localhost:${port}`);
 });
+
+
+
+
+
+
+
+
+
+
+
 
 
 
